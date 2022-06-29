@@ -33,26 +33,24 @@ function setup() {
 
 
 function draw() {
-  background(255);
- if(tower.y > ){
-      tower.y = 300
-    } 
+  background(0);
+ 
   
   if (gameState === "play") {
     
-    if(keyDown("")){
+    if(keyDown("left")){
         ghost.x = ghost.x - 3;
 
       // write a code to move left when left arrow is pressed
     }
-    if(keyDown("")){
+    if(keyDown("right")){
   
           ghost.x = ghost.x + 3;
 
       // write a code to move left when right arrow is pressed
       
     }
-    if(keyDown("")){
+    if(keyDown("space")){
   
          ghost.velocityY = -10;
 
@@ -64,7 +62,9 @@ function draw() {
   
    
       //write a condition for infinte scrolling tower
-    
+      if(tower.y > 400){
+        tower.y = 300
+      } 
       spawnDoors();
 
   
@@ -73,8 +73,8 @@ function draw() {
       ghost.velocityY = 0;
     }
     if(invisibleBlockGroup.isTouching(ghost) || ghost.y > 600){
-      ghost.
-      gameState = ""
+      ghost.destory()
+      gameState = "end"
     }
     
   
@@ -98,7 +98,9 @@ function spawnDoors()
     invisibleBlock.width = climber.width;
     invisibleBlock.height = 2;
     //add the random function
-    //
+    door.x=Math.round(random(120,400))
+    climber.x=door.x
+    invisibleBlock.x=door.x
     door.addImage(doorImg);
     climber.addImage(climberImg);
     
@@ -110,19 +112,20 @@ function spawnDoors()
     
      
 ghost.depth = door.depth;
-    ghost.depth =1;
+    ghost.depth+=1; 
+    
     
     //assign lifetime for the  door, climber and invisible block
 
- .lifetime = 800;
-    .lifetime = 800;
-    .lifetime = 800;
+    door.lifetime = 800;
+    invisibleBlock.lifetime = 800;
+    climber .lifetime = 800;
     //add each obstacle to the group obstaclesGroup.add(obstacle);here  obstacle are door, climber and invisible block
     
-     doorsGroup.add();
-    invisibleBlock.debug = true;
-    climbersGroup.add();
-    invisibleBlockGroup.add();
+     doorsGroup.add(door);
+    //invisibleBlock.debug = true;
+    climbersGroup.add(climber);
+    invisibleBlockGroup.add(invisibleBlock);
   }
 }
 
